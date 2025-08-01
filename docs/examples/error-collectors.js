@@ -1,4 +1,5 @@
 import { Model, ObjectModel } from "objectmodel";
+import DOMPurify from 'dompurify'; // Import DOMPurify for sanitization
 
 function log(msg, errors) {
 	console.log(msg);
@@ -6,7 +7,7 @@ function log(msg, errors) {
 		console.log(error);
 	});
 	document.write(
-		[msg, ...errors.map(e => e.message)].join("<br>→ ") + "<br><br>"
+		DOMPurify.sanitize([msg, ...errors.map(e => e.message)].join("<br>→ ") + "<br><br>") // Sanitize the HTML content
 	);
 }
 
